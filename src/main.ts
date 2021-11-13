@@ -7,6 +7,6 @@ async function bootstrap() {
   // myapi.com/clarin/api/users
   // myapi.com/bayer/api/user
   app.setGlobalPrefix(':tenant?/api');
-  await app.listen(3000);
+  await app.listen(AppModule.port);
 }
 bootstrap();

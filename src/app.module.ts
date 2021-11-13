@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConnectionOptions } from 'typeorm';
 import { TenancyModule } from './tenancy/tenancy.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -26,8 +27,15 @@ import { TenancyModule } from './tenancy/tenancy.module';
         } as ConnectionOptions;
       },
     }),
+    UserModule,
   ],
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule {
+  static port: number;
+
+  constructor(private readonly configService: ConfigService) {
+    AppModule.port = configService.get('APP_PORT');
+  }
+}
